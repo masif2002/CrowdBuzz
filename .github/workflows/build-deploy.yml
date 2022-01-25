@@ -3,11 +3,12 @@ name: Build and deploy
 on: [push]
 
 jobs:
-  build:
+  job1: 
+    build:
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Pulling git repo
-      - uses: actions/checkout@v2
-      - name: say hello
-      - run: echo "hello world!"
+      runs-on: ubuntu-latest
+      steps:
+        - name: Pulling git repo
+        - uses: actions/checkout@v2
+        - name: say hello
+        - run: echo "hello world!"
