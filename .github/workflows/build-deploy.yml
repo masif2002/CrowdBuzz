@@ -3,7 +3,7 @@ name: Build and deploy
 on: [push]
 
 jobs:
-  job1:
+  build: #job name - user defines
     
     environment:
       name: development
@@ -48,21 +48,29 @@ jobs:
           pip install pytest
           pytest
         
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v1
+      #   with:
+      #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v1
 
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:latest
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:buildcache,mode=max
+      # - name: Build and push
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:latest
+      #     cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:buildcache
+      #     cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:buildcache,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    
+    steps:
+      - name: deploying stuff
+      - run: echo "asifisdabest"
