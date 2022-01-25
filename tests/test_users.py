@@ -7,7 +7,7 @@ from app.config import settings
 
 def test_root(client):
     res = client.get('/')
-    assert res.status_code == 201 # from 200
+    assert res.status_code == 200
 
 def test_create_user(client):
     res = client.post('/users/', json={"email": "asif@facebook.com", "password": "password123"})
