@@ -8,14 +8,14 @@ jobs:
     environment:
       name: development
     env:
-      DATABASE_NAME: ${{secret.DATABASE_NAME}}
-      DATABASE_HOSTNAME: ${{secret.DATABASE_HOSTNAME}}
-      DATABASE_PORT: ${{secret.DATABASE_PORT}}
-      DATABASE_USERNAME: ${{secret.DATABASE_USERNAME}}
-      DATABASE_PASSWORD: ${{secret.DATABASE_PASSWORD}}
-      SECRET_KEY: ${{secret.SECRET_KEY}}
-      ALGORITHM: ${{secret.ALGORITHM}}
-      ACCESS_TOKEN_EXPIRE_MINUTES: ${{secret.ACCESS_TOKEN_EXPIRE_MINUTES}}
+      DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+      DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
+      DATABASE_PORT: ${{secrets.DATABASE_PORT}}
+      DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
+      DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+      SECRET_KEY: ${{secrets.SECRET_KEY}}
+      ALGORITHM: ${{secrets.ALGORITHM}}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
     steps:
       - name: Pulling git repo
         uses: actions/checkout@v2
