@@ -48,24 +48,24 @@ jobs:
           pip install pytest
           pytest
         
-      # - name: Login to Docker Hub
-      #   uses: docker/login-action@v1
-      #   with:
-      #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
-      #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      # - name: Build and push
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: .
-      #     file: ./Dockerfile
-      #     push: true
-      #     tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:latest
-      #     cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:buildcache
-      #     cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:buildcache,mode=max
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:latest
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-deploy:buildcache,mode=max
 
   deploy:
     runs-on: ubuntu-latest
@@ -84,13 +84,13 @@ jobs:
         heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
         heroku_email: ${{ secrets.HEROKU_EMAIL }}
 
-    - name: deploying in ubuntu
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.UBUNTU_HOST }}
-        username: ${{ secrets.UBUNTU_USERNAME }}
-        password: ${{ secrets.UBUNTU_PASSWORD }}
-        script: |
-          cd app/src
-          git pull
-          echo ${{ secrets.UBUNTU_PASSWORD }} | sudo systemctl restart api 
+    # - name: deploying in ubuntu
+    #   uses: appleboy/ssh-action@master
+    #   with:
+    #     host: ${{ secrets.UBUNTU_HOST }}
+    #     username: ${{ secrets.UBUNTU_USERNAME }}
+    #     password: ${{ secrets.UBUNTU_PASSWORD }}
+    #     script: |
+    #       cd app/src
+    #       git pull
+    #       echo ${{ secrets.UBUNTU_PASSWORD }} | sudo systemctl restart api 
