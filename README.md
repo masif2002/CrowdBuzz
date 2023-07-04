@@ -4,7 +4,7 @@
 * This project extends well past just basic API development. It also leverages tools that surround in building a complete and robust API
 
 ## Tech Stack
-- **FastAPI** - High-performace web framework used to build APIs
+- **FastAPI** - High-performance web framework used to build APIs
 - **PostgreSQL** - Relational DBMS
 - **SQLAlchemy** - ORM for python
 - **Alembic** - Database migration tool
